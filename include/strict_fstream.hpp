@@ -133,7 +133,8 @@ struct static_method_holder
             is_p->peek();
             peek_failed = is_p->fail();
         }
-        catch (std::ios_base::failure e) {}
+        // see https://stackoverflow.com/a/62030407
+        catch (const std::ios_base::failure& e) {}
         if (peek_failed)
         {
 	    is_p->setstate(std::ios::failbit);
